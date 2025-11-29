@@ -1,4 +1,6 @@
-/* Basic Reset for Consistency */
+/* -------------------------------------------------------------------
+| 1. GLOBAL RESET AND TYPOGRAPHY
+| ------------------------------------------------------------------- */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -8,95 +10,157 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   line-height: 1.6;
-  color: #333; /* Dark gray text */
-  background-color: #f8f8f8; /* Very light background */
+  color: #333;
+  background-color: #f8f8f8;
+  /* Ensure the body is a flex container for the fade-in animation to work reliably */
+  min-height: 100vh;
 }
 
-/* Base Styles */
+/* Base Styles for Headers */
 h1, h2, h3 {
-  color: #2c3e50; /* A darker, professional color */
+  color: #2c3e50;
   margin-bottom: 0.5em;
+  /* Added transition for subtle hover/focus effects */
+  transition: color 0.3s ease;
 }
 
 section {
-  padding: 40px 5%; /* Good padding for sections */
+  padding: 40px 5%;
   margin-bottom: 20px;
+  /* Applied the fade-in animation to sections */
+  animation: slideIn 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
+
+/* -------------------------------------------------------------------
+| 2. KEYFRAMES & LOAD ANIMATIONS
+| ------------------------------------------------------------------- */
+/* Fade in and slight slide up effect for sections */
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header animation for a dramatic entry */
+@keyframes headerEntrance {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* Stagger the appearance of sections for a cascading effect */
+#services { animation-delay: 0.4s; }
+#pricing { animation-delay: 0.6s; }
+#about { animation-delay: 0.8s; }
+#contact { animation-delay: 1.0s; }
+footer { animation-delay: 1.2s; }
+
+
+/* -------------------------------------------------------------------
+| 3. HEADER & CTA BUTTONS
+| ------------------------------------------------------------------- */
 header {
-  background: linear-gradient(135deg, #3498db, #2980b9); /* Blue gradient */
+  /* Using a subtle background change to simulate the "blue to white" effect on load */
+  background: linear-gradient(135deg, #2980b9, #3498db); 
   color: white;
-  padding: 60px 5%;
+  padding: 80px 5% 60px; /* Increased top padding */
   text-align: center;
+  /* Apply entrance animation to header */
+  animation: headerEntrance 0.8s ease-out forwards;
 }
 
 header h1 {
   color: white;
-  margin-bottom: 10px;
-  font-size: 2.5em;
+  margin-bottom: 15px;
+  font-size: 3em; /* Increased size */
+  font-weight: 700;
 }
 
 .hero-statement {
-  max-width: 800px; /* Constrain text width for readability */
-  margin: 0 auto 30px;
-  font-size: 1.1em;
+  max-width: 850px;
+  margin: 0 auto 40px;
+  font-size: 1.2em; /* Increased size */
+  font-weight: 300;
 }
 
 /* Button Styles */
 .btn {
   display: inline-block;
-  padding: 12px 25px;
+  padding: 14px 30px; /* Increased padding */
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: 50px; /* Fully rounded/pill-shaped */
   font-weight: bold;
-  transition: background-color 0.3s ease;
+  letter-spacing: 0.5px;
+  /* Increased and added transform for better animation */
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .btn-primary {
-  background-color: #e67e22; /* A strong orange for the main CTA */
+  background-color: #e67e22; 
   color: white;
   border: 2px solid #e67e22;
 }
 
 .btn-primary:hover {
   background-color: #d35400;
+  box-shadow: 0 8px 15px rgba(230, 126, 34, 0.5); /* Stronger shadow on hover */
+  transform: translateY(-2px); /* Lift higher */
 }
-/* --- Grid for Services and Pricing --- */
+
+/* -------------------------------------------------------------------
+| 4. GRIDS AND CARD ANIMATIONS
+| ------------------------------------------------------------------- */
 
 .services-grid,
 .pricing-grid {
   display: grid;
-  /* Creates 3 columns for desktop, automatically adjusts based on screen size */
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-  gap: 30px; /* Space between cards */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 35px; /* Increased gap */
   margin-top: 30px;
 }
 
 .service-card,
 .pricing-card {
   background: white;
-  padding: 25px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 30px; /* Increased padding */
+  border-radius: 12px; /* More rounded corners */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); /* Smoother initial shadow */
   text-align: center;
-  transition: transform 0.3s ease;
+  /* Increased transition duration for smoother hover */
+  transition: all 0.5s ease-in-out; 
+  border: 1px solid #eee;
 }
 
 .service-card:hover,
 .pricing-card:hover {
-  transform: translateY(-5px); /* Subtle lift on hover */
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px); /* Lift significantly more */
+  box-shadow: 0 15px 30px rgba(52, 152, 219, 0.3); /* Blue shadow for effect */
+  border-color: #3498db;
 }
 
 .service-card h3,
 .pricing-card h3 {
   color: #3498db;
+  font-size: 1.5em;
 }
 
 .price-placeholder {
-  font-size: 1.8em;
-  font-weight: bold;
+  font-size: 2.2em; /* Larger price font */
+  font-weight: 900;
   margin: 15px 0;
-  color: #2ecc71; /* Green for price */
+  color: #2ecc71;
 }
 
 .btn-secondary {
@@ -106,8 +170,19 @@ header h1 {
 }
 
 .btn-secondary:hover {
-  background-color: #bdc3c7;
+  background-color: #3498db; /* Invert colors on hover */
+  color: white;
+  transform: scale(1.05); /* Slight scale up */
 }
+
+/* -------------------------------------------------------------------
+| 5. CONTACT FORM
+| ------------------------------------------------------------------- */
+#contact {
+    background-color: white;
+    border-top: 1px solid #e0e0e0;
+}
+
 #contact form {
   max-width: 600px;
   margin: 0 auto;
@@ -117,8 +192,9 @@ header h1 {
 }
 
 #contact label {
-  font-weight: bold;
+  font-weight: 600;
   margin-top: 10px;
+  color: #555;
 }
 
 #contact input[type="text"],
@@ -126,36 +202,76 @@ header h1 {
 #contact input[type="tel"],
 #contact textarea {
   width: 100%;
-  padding: 12px;
+  padding: 15px; /* Larger inputs */
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 8px;
+  transition: border-color 0.3s;
+}
+
+#contact input:focus,
+#contact textarea:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
 }
 
 #contact button[type="submit"] {
-  padding: 15px;
+  padding: 18px; /* Larger submit button */
   background-color: #2c3e50;
   color: white;
   border: none;
   cursor: pointer;
-  font-size: 1.1em;
+  font-size: 1.2em;
 }
 
 #contact button[type="submit"]:hover {
   background-color: #34495e;
-}
-footer {
-  background-color: #333;
-  color: #ecf0f1;
-  text-align: center;
-  padding: 20px;
-  font-size: 0.9em;
+  transform: translateY(-1px);
 }
 
-footer p {
-  margin: 5px 0;
+/* -------------------------------------------------------------------
+| 6. FOOTER
+| ------------------------------------------------------------------- */
+footer {
+  background-color: #2c3e50; /* Matches form submit button */
+  color: #bdc3c7;
+  text-align: center;
+  padding: 30px;
+  font-size: 0.9em;
+  line-height: 1.8;
 }
 
 footer a {
   color: #3498db;
   text-decoration: none;
+  transition: color 0.3s;
 }
+
+footer a:hover {
+  color: #ecf0f1;
+  text-decoration: underline;
+}
+
+/* Ensure sections are initially invisible for the animation to work */
+#services, #pricing, #about, #contact, footer {
+    opacity: 0;
+}
+
+/* Ensure the header is separate so it can fade in first */
+header {
+    opacity: 0;
+}
+
+/* -------------------------------------------------------------------
+| 7. MEDIA QUERIES (Responsiveness)
+| ------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2em;
+  }
+  .hero-statement {
+    font-size: 1em;
+  }
+  section {
+    padding: 30px 4%;
+  }
